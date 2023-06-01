@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+.btn {
+  display: block;
+  width: 200px;
+  padding: 10px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  color:black;
+  background-color: white;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: lightskyblue;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+    </style>
+
+  <title>Profile</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Profile</h1>
+
+    <div class="buttons">
+      <a href="#" class="btn">Your Rides</a>
+      <a href="#" class="btn">Customer Care</a>
+      <a href="#" class="btn">Payments</a>
+      <a href="#" class="btn">Support</a>
+    </div>
+  </div>
+
+<script>
+// Get all the buttons
+var buttons = document.querySelectorAll('.btn');
+
+// Add click event listener to each button
+buttons.forEach(function(button) {
+  button.addEventListener('click', function(event) {
+    event.preventDefault();
+    
+    // Get the button text
+    var buttonText = button.innerText;
+    
+    // Perform action based on the button text
+    switch (buttonText) {
+      case 'Your Rides':
+        // Perform action for Your Rides button
+        console.log('Your Rides button clicked');
+        break;
+      case 'Customer Care':
+        // Perform action for Customer Care button
+        console.log('Customer Care button clicked');
+        break;
+      case 'Payments':
+        // Perform action for Payments button
+        console.log('Payments button clicked');
+        break;
+      case 'Support':
+        // Perform action for Support button
+        console.log('Support button clicked');
+        break;
+      default:
+        break;
+    }
+  });
+});
+
+    </script>
+
+
+</body>
+</html>

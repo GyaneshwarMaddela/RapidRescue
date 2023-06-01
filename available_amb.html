@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ambulance Available</title>
+  <style>
+   /* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color:black;
+}
+
+h2 {
+  color:green;
+}
+
+.form-item {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 2px;
+  color:black;
+}
+
+button {
+  padding: 10px 20px;
+  background-color:blue;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color:blue;
+}
+
+/* Styles for pickup and destination locations */
+.pickup-destination {
+  background-color: lightblue;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.pickup-destination .form-item {
+  display: inline-block;
+  width: 40%;
+  margin-bottom: 0;
+}
+
+/* Styles for available ambulances */
+.available-ambulances .ambulance {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.available-ambulances .ambulance img {
+  width: 100px;
+  height: auto;
+  margin-right: 80px;
+}
+
+.available-ambulances .ambulance-details {
+  flex-grow: 4;
+}
+
+.available-ambulances .ambulance-details h3 {
+  color:lightcoral;
+  margin: 0 0 10px;
+}
+
+.available-ambulances .ambulance-details p {
+  margin: 0;
+  color:black;
+}
+
+.book-btn {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  float: right;
+}
+
+.book-btn:hover {
+  background-color: green;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Available Ambulances</h1>
+    
+    <!-- Display pickup and destination locations -->
+    <div class="pickup-destination">
+      <div class="form-item">
+        <label>Pickup Location:</label>
+        <p id="pickup-location"></p>
+      </div>
+      <div class="form-item">
+        <label>Destination Location:</label>
+        <p id="destination-location"></p>
+      </div>
+    </div>
+
+    <!-- Display available ambulances -->
+    <div class="available-ambulances">
+      <h2>Available Ambulances</h2>
+      
+      <div class="ambulance">
+        <img src="ambulance1.jpg" alt="Ambulance 1">
+        <div class="ambulance-details">
+          <h3>Ambulance 1</h3>
+          <p>Ambulance Number: ABC123</p>
+          <p>Time Required to Reach: 10 minutes</p>
+          <p>Cost: $50 (Surge Pricing)</p>
+        </div>
+        <button class="book-btn">Book Now</button>
+      </div>
+
+      <div class="ambulance">
+        <img src="ambulance2.jpg" alt="Ambulance 2">
+        <div class="ambulance-details">
+          <h3>Ambulance 2</h3>
+          <p>Ambulance Number: XYZ456</p>
+          <p>Time Required to Reach: 15 minutes</p>
+          <p>Cost: $60 </p>
+        </div>
+        <button class="book-btn">Book Now</button>
+      </div>
+
+      <!-- Add more ambulances as needed -->
+    </div>
+  </div>
+
+  <script>
+    // Set pickup and destination locations
+    document.getElementById('pickup-location').innerText = sessionStorage.getItem('pickupLocation');
+    document.getElementById('destination-location').innerText = sessionStorage.getItem('destinationLocation');
+
+    // Add event listeners to Book Now buttons
+    var bookButtons = document.getElementsByClassName('book-btn');
+    for (var i = 0; i < bookButtons.length; i++) {
+      bookButtons[i].addEventListener('click', bookAmbulance);
+    }
+
+    // Function to handle ambulance booking
+    function bookAmbulance() {
+      // Retrieve ambulance details
+      var ambulanceDiv = this.parentNode;
+      var ambulanceName = ambulanceDiv.querySelector('h3').innerText;
+      var ambulanceNumber = ambulanceDiv.querySelector('p:nth-child(2)').innerText;
+      var timeToReach = ambulanceDiv.querySelector('p:nth-child(3)').innerText;
+      var cost = ambulanceDiv.querySelector('p:nth-child(4)').innerText;
+
+      /* Display booking details
+      alert("Booking Details:\n" +
+            "Ambulance Name: " + ambulanceName + "\n" +
+            "Ambulance Number: " + ambulanceNumber + "\n" +
+            "Time to Reach: " + timeToReach + "\n" +
+            "Cost: " + cost);   */
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!---- PHP CODE FOR AVAILABLE AMBULANCES
+
+<?php
+// Database connection details
+$host = 'localhost';
+$username = 'your_username';
+$password = 'your_password';
+$dbname = 'your_database';
+
+// Establish database connection
+$conn = new mysqli($host, $username, $password, $dbname);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Fetch available ambulances from database
+$sql = "SELECT * FROM ambulances";
+$result = $conn->query($sql);
+
+// Check if ambulances are available
+if ($result->num_rows > 0) {
+    // Output ambulances
+    while ($row = $result->fetch_assoc()) {
+        $ambulanceName = $row['name'];
+        $ambulanceNumber = $row['number'];
+        $timeToReach = $row['time_to_reach'];
+        $cost = $row['cost'];
+        $ambulancePhoto = $row['photo'];
+
+        // Display ambulance details
+        echo '<div class="ambulance">';
+        echo '<img src="' . $ambulancePhoto . '" alt="' . $ambulanceName . '">';
+        echo '<div class="ambulance-details">';
+        echo '<h3>' . $ambulanceName . '</h3>';
+        echo '<p>Ambulance Number: ' . $ambulanceNumber . '</p>';
+        echo '<p>Time Required to Reach: ' . $timeToReach . '</p>';
+        echo '<p>Cost: ' . $cost . '</p>';
+        echo '</div>';
+        echo '<button class="book-btn">Book Now</button>';
+        echo '</div>';
+    }
+} else {
+    // No ambulances available
+    echo '<p>No ambulances available at the moment.</p>';
+}
+
+// Close database connection
+$conn->close();
+?>
+
+
+-->
+
+
+
+<!----MYSQL TABLE FOR AVAILABLE AMBULANCES
+
+    CREATE TABLE ambulances (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    number VARCHAR(50),
+    time_to_reach VARCHAR(50),
+    cost DECIMAL(8, 2),
+    photo VARCHAR(255)
+);
+
+
+-->

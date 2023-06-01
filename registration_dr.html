@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Driver Registration</title>
+</head>
+<body>
+  <style>
+/* Body styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Form container styles */
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading styles */
+h1 {
+  text-align: center;
+}
+
+/* Label styles */
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Input styles */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+/* Submit button styles */
+input[type="submit"] {
+  background-color: #4caf50;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  font-size: 16px;
+  cursor: pointer;
+  
+}
+
+/* Submit button hover effect */
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+    </style>
+  <h1>Driver Registration</h1>
+
+  <form action="process_registration.php" method="POST">
+    <label for="full_name">Full Name:</label>
+    <input type="text" id="full_name" name="full_name" required><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="phone_number">Phone Number:</label>
+    <input type="tel" id="phone_number" name="phone_number" required><br><br>
+
+    <div class="form-group">
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob" name="dob" required>
+    </div>
+
+    <label for="driver_license">Driver's License:</label>
+    <input type="text" id="driver_license" name="driver_license" required><br><br>
+
+    <label for="vehicle_make">Vehicle Make:</label>
+    <input type="text" id="vehicle_make" name="vehicle_make" required><br><br>
+
+    <label for="vehicle_model">Vehicle Model:</label>
+    <input type="text" id="vehicle_model" name="vehicle_model" required><br><br>
+
+    <label for="vehicle_plate_number">Vehicle Plate Number:</label>
+    <input type="text" id="vehicle_plate_number" name="vehicle_plate_number" required><br><br>
+
+    
+    <label for="other_documents">Licence:</label>
+    <input type="file" id="other_documents" name="other_documents" required><br><br>
+
+    <label for="other_documents">ID card:</label>
+    <input type="file" id="other_documents" name="other_documents" required><br><br>
+
+    <label for="other_documents">Plate Number:</label>
+    <input type="file" id="other_documents" name="other_documents" required><br><br>
+
+    <label for="other_documents">Ambulance Image Front:</label>
+    <input type="file" id="other_documents" name="other_documents" required><br><br>
+
+    <label for="other_documents">Ambulance Image Back:</label>
+    <input type="file" id="other_documents" name="other_documents" required><br><br>
+
+    <label for="other_documents">Ambulance Image Inside:</label>
+    <input type="file" id="other_documents" name="other_documents" required><br><br>
+
+    <label for="other_documents">Driver Photo:</label>
+    <input type="file" id="other_documents" name="other_documents" required><br><br>
+
+    <label for="other_documents">Ambulance Category:</label>
+    <input type="file" id="other_documents" name="other_documents" required><br><br>
+
+    <form>
+      <label for="password">Password:</label>
+      <div class="password-toggle">
+        <input type="password" id="password" name="password" required>
+        <i class="toggle-icon" id="toggle-password" onclick="togglePasswordVisibility('password', 'toggle-password')">&#128065;</i>
+      </div>
+
+      <label for="confirm-password">Confirm Password:</label>
+      <div class="password-toggle">
+        <input type="password" id="confirm-password" name="confirm-password" required>
+        <i class="toggle-icon" id="toggle-confirm-password" onclick="togglePasswordVisibility('confirm-password', 'toggle-confirm-password')">&#128065;</i>
+      </div>
+
+    <input type="submit" value="Submit">
+  </form>
+
+<script>
+    function validateForm() {
+      var fullName = document.getElementById('full_name').value;
+      var email = document.getElementById('email').value;
+      var phoneNumber = document.getElementById('phone_number').value;
+      var driverLicense = document.getElementById('driver_license').value;
+      var vehicleMake = document.getElementById('vehicle_make').value;
+      var vehicleModel = document.getElementById('vehicle_model').value;
+      var vehiclePlateNumber = document.getElementById('vehicle_plate_number').value;
+
+      if (fullName === '' || email === '' || phoneNumber === '' || driverLicense === '' || vehicleMake === '' || vehicleModel === '' || vehiclePlateNumber === '') {
+        alert('Please fill in all required fields.');
+        return false;
+      }
+
+      return true;
+    }
+  </script>
+
+</body>
+</html>

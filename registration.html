@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ambulance Booking System - Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .error {
+      color: red;
+    }
+
+    .password-toggle {
+      display: flex;
+      align-items: center;
+    }
+
+    .password-toggle input[type="checkbox"] {
+      margin-right: 5px;
+    }
+
+    .password-toggle .toggle-icon {
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .submit-btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Registration</h2>
+    <form id="registration-form" onsubmit="return validateForm()">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email">
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone">
+
+      <label for="password">Password:</label>
+      <div class="password-toggle">
+        <input type="password" id="password" name="password" required>
+        <i class="toggle-icon" id="toggle-password" onclick="togglePasswordVisibility('password', 'toggle-password')">&#128065;</i>
+      </div>
+
+      <label for="confirm-password">Confirm Password:</label>
+      <div class="password-toggle">
+        <input type="password" id="confirm-password" name="confirm-password" required>
+        <i class="toggle-icon" id="toggle-confirm-password" onclick="togglePasswordVisibility('confirm-password', 'toggle-confirm-password')">&#128065;</i>
+      </div>
+
+      <p id="error-message" class="error"></p>
+
+      <input type="submit" value="Register" class="submit-btn">
+    </form>
+  </div>
+
+  <script>
+    function togglePasswordVisibility(passwordFieldId, toggleIconId) {
+      var passwordField = document.getElementById(passwordFieldId);
+      var toggleIcon = document.getElementById(toggleIconId);
+
+      if (passwordField.type === "password") {
+        passwordField.type = "text";
+        toggleIcon.innerHTML = "&#128064;"; // Eye open symbol
+      } else {
+        passwordField.type = "password";
+        toggleIcon.innerHTML = "&#128065;"; // Eye closed symbol
+      }
+    }
+
+    function validateForm() {
+      var username = document.getElementById("username").value;
+      var email = document.getElementById("email").value;
+      var phone = document.getElementById("phone").value;
+      var password = document.getElementById("password").value;
+      var confirmPassword = document.getElementById("confirm-password").value;
+      var errorMessage = document.getElementById("error-message");
+
+      if (email === "" && phone === "") {
+        errorMessage.textContent = "Please enter either an email address or phone number.";
+        return false;
+      }
+
+      if (password !== confirmPassword) {
+        errorMessage.textContent = "Passwords do not match.";
+        return false;
+      }
+
+      // Additional validation logic can be added here
+
+      // If all validations pass, you can proceed with registration
+      alert("Registration successful!");
+
+      return true;
+    }
+  </script>
+</body>
+</html>

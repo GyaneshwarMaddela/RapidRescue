@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ambulance Booking</title>
+  <style>
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+}
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.form-item {
+  width: 45%;
+  margin-bottom: 20px;
+}
+
+.form-item label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.form-item input[type="text"],
+.form-item input[type="tel"],
+.form-item input[type="email"],
+.form-item input[type="date"],
+.form-item input[type="time"],
+.form-item input[type="ambulance-type"],
+.form-item input[type="service-type"],
+.form-item select,
+.form-item textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.submit-btn {
+  width: 50%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 0 auto;
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  .form-item {
+    width: 100%;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Ambulance Booking</h1>
+    <form class="form" onsubmit="return submitForm()">
+      <div class="form-item">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+
+      <div class="form-item">
+        <label for="contact">Phone Number or Email:</label>
+        <input type="text" id="contact" name="contact" required>
+      </div>
+
+      <div class="form-item">
+        <label for="pickup">Pickup Location:</label>
+        <input type="text" id="pickup" name="pickup" required>
+      </div>
+
+      <div class="form-item">
+        <label for="destination">Destination Location:</label>
+        <input type="text" id="destination" name="destination" required>
+      </div>
+
+      <div class="form-item">
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+      </div>
+
+      <div class="form-item">
+        <label for="time">Time:</label>
+        <input type="time" id="time" name="time" required>
+      </div>
+
+      <div class="form-item">
+        <label for="ambulance-type">Ambulance Type:</label>
+        <select id="ambulance-type" name="ambulance-type" required>
+          <option value="bls">BLS</option>
+          <option value="als">ALS</option>
+          <option value="neonatal">Neonatal</option>
+        </select>
+      </div>
+
+      <div class="form-item">
+        <label for="service-type">Service Type:</label>
+        <select id="service-type" name="service-type" required>
+          <option value="emergency">Emergency</option>
+          <option value="discharge">Discharge</option>
+        </select>
+      </div>
+
+      <!-- Add a div to hold the map -->
+      <div id="map"></div>
+
+      <input type="submit" value="Submit" class="submit-btn">
+    </form>
+  </div>
+
+  <!-- Include the Google Maps JavaScript API -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+
+  <script>
+    function initMap() {
+      var pickupInput = document.getElementById('pickup');
+      var destinationInput = document.getElementById('destination');
+
+      var autocompleteOptions = {
+        types: ['geocode']
+      };
+
+      // Create autocomplete instances for pickup and destination inputs
+      var pickupAutocomplete = new google.maps.places.Autocomplete(pickupInput, autocompleteOptions);
+      var destinationAutocomplete = new google.maps.places.Autocomplete(destinationInput, autocompleteOptions);
+
+      // Center the map on the selected location
+      function centerMapOnPlace(place) {
+        if (place.geometry && place.geometry.location) {
+          var map = new google.maps.Map(document.getElementById('map'), {
+            center: place.geometry.location,
+            zoom: 13
+          });
+
+          // Add a marker to the selected location
+          var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location
+          });
+        }
+      }
+
+      // When pickup location is selected, center the map on the location
+      pickupAutocomplete.addListener('place_changed', function() {
+        var place = pickupAutocomplete.getPlace();
+        centerMapOnPlace(place);
+      });
+
+      // When destination location is selected, center the map on the location
+      destinationAutocomplete.addListener('place_changed', function() {
+        var place = destinationAutocomplete.getPlace();
+        centerMapOnPlace(place);
+      });
+    }
+
+    // Initialize the map
+    initMap();
+
+    // Rest of your JavaScript code
+    function submitForm() {
+      // Form submission logic
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!----php code for book a ambulance 
+
+
+<?php
+// Establish database connection
+$servername = "localhost";
+$username = "your_username";
+$password = "your_password";
+$database = "your_database";
+
+$conn = new mysqli($servername, $username, $password, $database);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Function to sanitize user inputs
+function sanitize($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = sanitize($_POST["name"]);
+    $contact = sanitize($_POST["contact"]);
+    $pickup = sanitize($_POST["pickup"]);
+    $destination = sanitize($_POST["destination"]);
+    $date = sanitize($_POST["date"]);
+    $time = sanitize($_POST["time"]);
+    $ambulanceType = sanitize($_POST["ambulance-type"]);
+    $serviceType = sanitize($_POST["service-type"]);
+
+    // Insert the form data into the database
+    $sql = "INSERT INTO ambulance_bookings (name, contact, pickup, destination, date, time, ambulance_type, service_type)
+            VALUES ('$name', '$contact', '$pickup', '$destination', '$date', '$time', '$ambulanceType', '$serviceType')";
+
+    if ($conn->query($sql) === TRUE) {
+        // Booking successful
+        echo "Booking successfully submitted.";
+    } else {
+        // Error in booking submission
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    // Close the database connection
+    $conn->close();
+}
+?>
+
+----->
+
+
+<!--------mysql for book a ambulance 
+
+  CREATE TABLE ambulance_bookings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    contact VARCHAR(100) NOT NULL,
+    pickup VARCHAR(255) NOT NULL,
+    destination VARCHAR(255) NOT NULL,
+    date DATE NOT NULL,
+    time TIME NOT NULL,
+    ambulance_type VARCHAR(50) NOT NULL,
+    service_type VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+-->

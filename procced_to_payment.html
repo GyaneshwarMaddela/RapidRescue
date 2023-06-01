@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ambulance Booking Details</title>
+  <style>
+    
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+/* Booking Details Section */
+.booking-details {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.ambulance-photo img {
+  max-width: 200px;
+  height: auto;
+  margin-right: 200px;
+}
+
+.ambulance-info {
+  flex: 2;
+}
+
+.remove-btn {
+  background-color:lightseagreen;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  float: right;
+}
+
+/* Apply Coupon and Select Option Section */
+.coupon-select {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.apply-coupon,
+.select-option {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.apply-coupon input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+}
+
+.apply-btn {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.select-option select {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+}
+
+/* Order Details Section */
+.order-details {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.order-summary,
+.cost {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.proceed-btn {
+  text-align: right;
+}
+
+.proceed-btn button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .booking-details {
+    flex-direction: column;
+  }
+
+  .ambulance-photo img {
+    max-width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .remove-btn {
+    float: none;
+    margin-top: 10px;
+  }
+
+  .coupon-select {
+    flex-direction: column;
+  }
+
+  .apply-coupon,
+  .select-option {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .order-details {
+    flex-direction: column;
+  }
+
+  .proceed-btn {
+    text-align: center;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Ambulance Booking Details</h1>
+
+    <!-- Booking details -->
+    <div class="booking-details">
+      <div class="ambulance-photo">
+        <img src="ambulance1.jpg" alt="Ambulance Photo">
+      </div>
+      <div class="ambulance-info">
+        <h2>Ambulance 1</h2>
+        <p>Ambulance ID: 123456</p>
+        <p>Driver Name: John Doe</p>
+        <p>Pickup Location: New York</p>
+        <p>Destination Location: Los Angeles</p>
+        <p>Ambulance Type: ALS</p>
+        <p>Service Type: Emergency</p>
+        <p>Cost: $200</p>
+        <button class="remove-btn">Remove</button>
+      </div>
+    </div>
+
+    <!-- Apply coupon and select options -->
+    <div class="coupon-select">
+      <div class="apply-coupon">
+      
+        <button class="apply-btn"><h2>Apply Coupon</h2></button>
+      </div>
+      
+        <h2>Select</h2>
+    
+    </div>
+
+    <!-- Order details -->
+    <div class="order-details">
+      <div class="order-summary">
+        <h2>Order Summary</h2>
+        <p>Total: $200</p>
+        <p>Coupon Savings: $0</p>
+        <p>Amount Payable: $200</p>
+      </div>
+      <div class="cost">
+        <h2>Cost</h2>
+        <p>$200</p>
+      </div>
+      <div class="proceed-btn">
+        <button class="proceed-btn">Proceed to Payment</button>
+      </div>
+    </div>
+  </div>
+
+
+ <script>
+  // Remove button click event handler
+  var removeBtn = document.querySelector('.remove-btn');
+  removeBtn.addEventListener('click', function() {
+    // Remove the booking details section
+    var bookingDetails = document.querySelector('.booking-details');
+    bookingDetails.parentNode.removeChild(bookingDetails);
+  });
+  
+  // Apply button click event handler
+  var applyBtn = document.querySelector('.apply-btn');
+  applyBtn.addEventListener('click', function() {
+    // Get the entered coupon code
+    var couponCode = document.querySelector('.apply-coupon input').value;
+  
+    // TODO: Apply the coupon code and update the order summary
+    // You can use AJAX or make an API call to handle the coupon code logic
+  
+    // Clear the coupon code input field
+    document.querySelector('.apply-coupon input').value = '';
+  });
+  
+  // Proceed to Payment button click event handler
+  var proceedBtn = document.querySelector('.proceed-btn button');
+  proceedBtn.addEventListener('click', function() {
+    // TODO: Add the necessary logic to proceed to the payment page
+    // You can redirect the user to the payment page or show a confirmation message
+  });
+  
+</script>
+
+</body>
+</html>
+
+

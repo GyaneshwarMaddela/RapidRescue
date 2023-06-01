@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ola Bookings - Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+
+    .password-toggle {
+      display: flex;
+      align-items: center;
+    }
+
+    .password-toggle input[type="checkbox"] {
+      margin-right: 5px;
+    }
+
+    .password-toggle .toggle-icon {
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background-color: #f36f21;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .submit-btn:hover {
+      background-color: #d55e1e;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 600px) {
+      .container {
+        max-width: 100%;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Login</h2>
+    
+
+      <form id="login-form" onsubmit="return validateForm()">
+        <label for="phone-email">Phone Number or Email:</label>
+        <input type="text" id="phone-email" name="phone-email" required>
+  
+        
+      <label for="password">Password:</label>
+      <div class="password-toggle">
+        <input type="password" id="password" name="password" required>
+        <i class="toggle-icon" id="toggle-password" onclick="togglePasswordVisibility('password', 'toggle-password')">&#128065;</i>
+      </div>
+
+      <p id="error-message" class="error"></p>
+
+      <input type="submit" value="Login" class="submit-btn">
+    </form>
+  </div>
+
+  <script>
+ function togglePasswordVisibility(passwordFieldId, toggleIconId) {
+      var passwordField = document.getElementById(passwordFieldId);
+      var toggleIcon = document.getElementById(toggleIconId);
+
+      if (passwordField.type === "password") {
+        passwordField.type = "text";
+        toggleIcon.innerHTML = "&#128064;"; // Eye open symbol
+      } else {
+        passwordField.type = "password";
+        toggleIcon.innerHTML = "&#128065;"; // Eye closed symbol
+      }
+    }
+
+        function validateForm() {
+      
+
+      var registrationphoneEmail = "john@example.com || 124"; // Example registration email
+      var registrationPassword = "password123"; // Example registration password
+      var phoneEmail = document.getElementById("phone-email").value;
+      var email = document.getElementById("email").value;
+      var password = document.getElementById("password").value;
+      var errorMessage = document.getElementById("error-message");
+
+
+
+      if (email === registrationphoneEmail  && password === registrationPassword) {
+        alert("Login successful!");
+        return true;
+      } else {
+        errorMessage.textContent = "Invalid email or password.";
+        return false;
+      }
+    }
+  </script>
+</body>
+</html>
